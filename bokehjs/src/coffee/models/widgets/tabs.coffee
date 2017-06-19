@@ -6,6 +6,10 @@ import {Widget, WidgetView} from "./widget"
 
 export class TabsView extends WidgetView
 
+  connect_signals: () ->
+    super()
+    @connect(@model.properties.tabs.change, () => @rebuild_child_views())
+
   render: () ->
     super()
 
@@ -44,9 +48,6 @@ export class TabsView extends WidgetView
       panelEl.appendChild(@child_views[child.id].el)
 
     return @
-
-  show: (tab) ->
-    # TODO
 
 export class Tabs extends Widget
   type: "Tabs"
